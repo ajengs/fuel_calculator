@@ -7,10 +7,16 @@ defmodule FuelCalculator.Supervisor do
 
   def init(:ok) do
     children = [
-      {FuelCalculator.TaskWorker, []}
+      {FuelCalculator.Server, []}
     ]
 
-    opts = [strategy: :one_for_one, name: FuelCalculator.Supervisor]
+    opts = [
+      strategy: :one_for_one,
+      name: FuelCalculator.Supervisor,
+      max_restarts: 3,
+      max_seconds: 5
+    ]
+
     Supervisor.init(children, opts)
   end
 end
