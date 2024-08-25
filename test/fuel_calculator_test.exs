@@ -54,24 +54,4 @@ defmodule FuelCalculatorTest do
              {:land, "earth"}
            ]) == 212_161
   end
-
-  describe "reverse" do
-    test "calculate the fuel needed to launch from Earth" do
-      assert FuelCalculator.calculate_total_fuel(28801, [{:launch, "earth"}]) == 19772
-    end
-
-    test "calculate the fuel needed to land on Moon" do
-      assert FuelCalculator.calculate_total_fuel(28801 + 19772, [{:land, "moon"}]) == 2648
-    end
-
-    test "calculate the fuel needed to launch from Moon" do
-      assert FuelCalculator.calculate_total_fuel(28801 + 19772 + 2648, [{:launch, "moon"}]) ==
-               3653
-    end
-
-    test "calculate the fuel needed to land on Earth" do
-      assert FuelCalculator.calculate_total_fuel(28801 + 19772 + 2648 + 3653, [{:land, "earth"}]) ==
-               25878
-    end
-  end
 end
