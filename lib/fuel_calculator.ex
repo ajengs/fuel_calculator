@@ -1,12 +1,18 @@
 defmodule FuelCalculator do
   use Application
 
-  def start(_type, _args) do
+  def start(_, _) do
     children = [
-      FuelCalculator.Supervisor
+      {FuelCalculator.Server, []}
     ]
 
-    opts = [strategy: :one_for_one, name: FuelCalculator]
+    opts = [
+      strategy: :one_for_one,
+      name: Supervisor,
+      max_restarts: 3,
+      max_seconds: 5
+    ]
+
     Supervisor.start_link(children, opts)
   end
 end

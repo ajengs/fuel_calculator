@@ -2,6 +2,10 @@ defmodule FuelCalculator.Server do
   use GenServer
   alias FuelCalculator.Worker
 
+  @callback perform(mass :: non_neg_integer(), path :: [non_neg_integer()]) ::
+              {:ok, non_neg_integer()} | {:error, String.t()}
+  @callback get_tasks() :: [{non_neg_integer(), [non_neg_integer()], non_neg_integer()}]
+
   def start_link(_) do
     GenServer.start_link(__MODULE__, %{}, name: __MODULE__)
   end
